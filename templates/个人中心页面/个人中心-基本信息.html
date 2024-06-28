@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <title>个人中心-基本信息</title>
+    <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static',filename='js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+        <link href="{{ url_for('static',filename='css/selfData/selfData_style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">用户中心</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">基本信息</a></li>
+                    <li><a href="{{url_for('usercenter.account')}}">账户信息</a></li>
+                    <li><a href="{{url_for('usercenter.address')}}">收货地址</a></li>
+
+                    <li><a href="{{url_for('users.logout')}}"><span class="glyphicon glyphicon-log-in"></span> 退出</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+
+    </nav>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-3 column">
+                        <h2>头像</h2>
+                        <img alt="140x140" width="200px" height="200px" src="{{url_for('usercenter.head_photo')}}"
+                            class="img-circle" />
+                        <form role="form" method="post" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">上传头像</label><input type="file" name="head_photo"
+                                    id="exampleInputFile" />
+
+                            </div>
+                            <button type="submit" class="btn btn-default">上传</button>
+                        </form>
+                    </div>
+                    <!--这里做一个表单，包含昵称、城市、性别、生日、个性签名等-->
+                    <div class="col-md-9 column">
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <form class="form-horizontal" role="form" method="post">
+
+                                    <div class="wlfg-wrap clearfix">
+
+                                        <label for="firstname" class="col-md-offset-1 control-label">
+                                            <font size="5">昵称:</font>
+                                        </label>
+
+                                        {% if user_detail.nickname %}
+                                        <input type="text" class="col-md-offset-1 form-control" name="nickname"
+                                            id="firstname" placeholder="{{ user_detail.nickname }}">
+                                        {% else %}
+                                        <input type="text" class="col-md-offset-1 form-control" name="nickname"
+                                            id="firstname" placeholder="请输入昵称">
+                                        {% endif %}
+                                    </div>
+                                </form>
+                                <div class="wlfg-wrap clearfix">
+                                    <label class="col-md-offset-1 label-name" for="province">
+                                        <font size="5">城市:</font>
+                                    </label>
+                                    <div class="rlf-group profile-address">
+                                        {% if user_detail.city %}
+                                        <p class="col-md-offset-1">{{user_detail.city}}</p>
+                                        {% endif %}
+                                        <select id="province" onchange="updateCities()"
+                                            class='col-md-offset-1 moco-form-control' hidefocus="true">
+                                            <option value="">选择省份</option>
+                                            {% for province in provinces %}
+                                            <option value="{{province.area_id}}">{{province.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select class='moco-form-control' id="city" hidefocus="true"
+                                            onchange="updateDistricts()">
+                                            <!-- 根据已选择省份添加城市 -->
+                                            <option value="">选择城市</option>
+                                        </select>
+                                        <select class='moco-form-control mr0' id="district" hidefocus="true">
+                                            <option value="">选择区县</option>
+                                        </select>
+                                        <div class="cb"></div>
+                                        <p class="rlf-tip-wrap errorHint color-red"></p>
+                                    </div>
+                                    <div class="col-md-offset-1 wlfg-wrap clearfix">
+                                        <label class="label-name h16 lh16">
+                                            <font size="5">性别：</font>
+                                        </label>
+                                        <div class="rlf-group rlf-radio-group">
+                                            <label class="lh16"><input type="radio" hidefocus="true" value="0"
+                                                    name="sex">保密</label>
+                                            <label class="lh16"><input type="radio" hidefocus="true" value="1"
+                                                    name="sex">男</label>
+                                            <label class="lh16"><input type="radio" hidefocus="true" value="2"
+                                                    name="sex">女</label>
+                                            <p class="rlf-tip-wrap errorHint color-red"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-offset-1 wlfg-wrap clearfix">
+                                        <label class="label-name" for="aboutme">
+                                            <font size="5">个性签名：</font>
+                                        </label>
+                                        <div class="form-group">
+                                            <!--这段还没实现，128个字符是固定显示的-->
+                                            {% if user_detail.Personal_signature %}
+                                            <textarea id="aboutme" rows="10" class="noresize js-sign form-control"
+                                                placeholder="{{user_detail.Personal_signature}}"></textarea>
+                                            {% else %}
+                                            <textarea id="aboutme" rows="10" class="noresize js-sign form-control"
+                                                placeholder="请输入个性签名"></textarea>
+                                            {% endif %}
+                                            <p class="numCanInput js-numCanInput ">还可以输入128个字符</p>
+                                        </div>
+                                    </div>
+
+
+
+                                    <button type="button" class="col-md-offset-1 btn btn-success btn-lg"
+                                        onclick="submit()">保存</button>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var selectedProvince = '';
+        var selectedCity = '';
+        var selectedDistrict = '';
+        // Function to update the city dropdown based on the selected province
+        function updateCities() {
+            var provinceId = $('#province').val();
+            if (!provinceId) {
+                $('#city').empty().append('<option value="">选择城市</option>');
+                $('#district').empty().append('<option value="">选择区域</option>');
+                return;
+            }
+            $.get('/usercenter/cities', { 'province_id': provinceId }, function (response) {
+                var cities = response['cities'];
+                var options = '<option value="">选择城市</option>';
+                for (var i = 0; i < cities.length; i++) {
+                    options += '<option value="' + cities[i]['id'] + '">' + cities[i]['name'] + '</option>';
+                }
+                $('#city').empty().append(options);
+                selectedCity = ''; // 清空之前保存的城市名称
+                selectedDistrict = ''; // 清空之前保存的区名称
+            });
+        }
+        function updateDistricts() {
+            var cityId = $('#city').val();
+            if (!cityId) {
+                $('#district').empty().append('<option value="">选择区域</option>');
+                return;
+            }
+            $.get('/usercenter/districts', { 'city_id': cityId }, function (response) {
+                var districts = response['districts'];
+                var options = '<option value="">选择区域</option>';
+                for (var i = 0; i < districts.length; i++) {
+                    options += '<option value="' + districts[i]['id'] + '">' + districts[i]['name'] + '</option>';
+                }
+                $('#district').empty().append(options);
+            });
+        }
+        // 监听省份下拉框的change事件，保存选择的城市名称
+        $('#province').change(function () {
+            selectedProvince = $('#province option:selected').text();
+        });
+        // 监听城市下拉框的change事件，保存选择的城市名称
+        $('#city').change(function () {
+            selectedCity = $('#city option:selected').text();
+        });
+        // 监听区县下拉框的change事件，保存选择的城市名称
+        $('#district').change(function () {
+            selectedDistrict = $('#district option:selected').text();
+        });
+
+        function submit() {
+            const nickname = document.getElementsByName('nickname')[0].value;
+            const province = selectedProvince;
+            const city = selectedCity;
+            const district = selectedDistrict;
+            const aboutme = document.getElementById('aboutme').value;
+            // 获取选中的性别值
+            const sexInputs = document.getElementsByName('sex');
+            let selectedSex = '';
+            for (let i = 0; i < sexInputs.length; i++) {
+                if (sexInputs[i].checked) {
+                    selectedSex = sexInputs[i].value;
+                    break;
+                }
+            };         
+            const data = {
+                nickname: nickname,
+                city: province + city + district,
+                sex: selectedSex,
+                aboutme: aboutme
+            };
+            $.ajax({
+                url: '/usercenter/update_basic',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    // 保存成功后重新加载页面
+                    location.reload();
+                }
+            })
+        }
+        function setChecked() {
+            const getSex = {{user_detail.sex}};
+            if (getSex == 1) {
+                document.getElementsByName('sex')[1].checked = true;
+            } else if (getSex == 2) {
+                document.getElementsByName('sex')[2].checked = true;
+            } else if (getSex == 0) {
+                document.getElementsByName('sex')[0].checked = true;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            setChecked();
+        });
+        
+    </script>
+</body>
+
+</html>

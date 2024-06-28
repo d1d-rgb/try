@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1">
+        <title>Title</title>
+        <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <script src="{{ url_for('static',filename='js/jquery-3.7.1.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+        <link href="{{ url_for('static',filename='css/ershou/styles.css') }}">
+    </head>
+    <body>
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <h1>校园二手交易平台</h1>
+
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav" >
+                        <li class="active"><a href="{{ url_for('wuping.index') }}">主页</a></li>
+                        <li><a href="{{ url_for('qa.index') }}">讨论区</a></li>
+{#                        <li><a href="{{ url_for('###') }}">AI客服</a></li>#}
+                        <li><a href="#" data-toggle="modal" data-target="#aboutModal">关于我们</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('wuping.public_wuping') }}"><span class="glyphicon glyphicon-shopping-cart"></span>出售闲置</a></li>
+                        <li><a href="{{ url_for('usercenter.basic') }}"><span class="glyphicon glyphicon-user"></span> 用户中心</a></li>
+                        {% if user %}
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="{{ url_for('usercenter.basic') }}"><span class="nav-link">{{ user.username }}</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('users.logout') }}">退出登录</a>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ url_for('users.login') }}"><span class="glyphicon glyphicon-tower"></span> 登录</a></li>
+                            <li><a href="{{ url_for('users.register') }}"><span class="glyphicon glyphicon-log-in"></span> 注册</a></li>
+                        {% endif %}
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search" method="GET" action="{{ url_for('wuping.search') }}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search"/>
+                        </div> <button type="submit" class="btn btn-default" >搜索</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 模态框 -->
+        <div id="aboutModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- 模态框内容 -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">关于我们</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 这里放关于我们的文本信息 -->
+                        <p>1.欢迎来到STU二手交易平台，我们是一个专注于为使用者提供便利的二手商品交易服务的在线平台，并集成了讨论区和AI客服功能，致力于建立一个让买家和卖家能够轻松地进行物品交易的环境。</p >
+                        <br>
+                        <p>2.平台具备全面的二手交易功能，包括详细的商品分类、便捷的搜索栏和每日好物推荐系统，确保用户可以按照个人需求查询需要的商品。卖家可以通过发布商品展示商品信息、购买方式和联系方式，卖家则可以通过搜索、推荐的途径获取商品信息。</p >
+                        <br>
+                        <p>3.“讨论区”主要为用户提供沟通和交流的环境，以便获取更真实的反馈和更良好的使用体验。在讨论区中，用户可以浏览、搜索和发布帖子。</p >
+                        <br>
+                        <p>4.为了提高用户的使用体验，网站配备的“AI客服”功能将提供完善的答疑解惑功能，关于在本网站使用时出现的任何问题，你都可以通过本功能得到答案。</p >
+                        <br>
+                        <p>5.如果还有任何使用问题或需要售后服务，请联系人工客服。电话：xxxxxxxxxxx</p >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <!--自动轮播功能-->
+                    <div class="carousel slide" data-ride=“carousel“ id="carousel-488077">
+                        <ol class="carousel-indicators">
+                            <li data-slide-to="0"  data-target="#carousel-488077">
+                            </li>
+                            <li data-slide-to="1"  data-target="#carousel-488077" class="active">
+                            </li>
+                            <li data-slide-to="2"  data-target="#carousel-488077">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item">
+                                <img alt="" src="{{ url_for('static',filename='/source/轮播图/轮播图1.png') }}"/>
+                                <div class="carousel-caption">
+                                    <h4>
+                                        1
+                                    </h4>
+                                    <p>
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="item active">
+                                <img alt="" src="{{ url_for('static',filename='/source/轮播图/轮播图2.png') }}" />
+                                <div class="carousel-caption">
+                                    <h4>
+                                        2
+                                    </h4>
+                                    <p>
+
+                                    </p>
+                                </div>
+                            </div>{{ url_for('static',filename='/source/轮播图/轮播图3.png') }}
+                            <div class="item">
+                                <img alt="" src="{{ url_for('static',filename='/source/轮播图/轮播图3.png') }}" />
+                                <div class="carousel-caption">
+                                    <h4>
+                                        3
+                                    </h4>
+                                    <p>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <a class="left carousel-control" href="#carousel-488077" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="right carousel-control" href="#carousel-488077" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3 class="text-center">
+                        <strong><font size="7">今日好物</font></strong>
+                    </h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row clearfix">
+                {% for wuping in wupings %}
+                    <div class="col-md-3 column">
+                        <a href="{{ url_for('wuping.wuping_detail',wuping_id=wuping.id) }}" ><img alt="" src="{{url_for('static',filename='source/wupimg/'+wuping.title+'.png') }}" width="100%" /></a>
+                        <h2>
+                            ￥{{ wuping.price }}
+                        </h2>
+                        <h4>
+                            {{ wuping.title }}
+                        </h4>
+                        </div>
+                        {% endfor %}
+            </div>
+            <header class="bs-docs-nav navbar navbar-static-top" id="top"></header>
+            <a href="#top" class="back-to-top"> Back to top </a>
+        </div>
+    </body>
+</html>

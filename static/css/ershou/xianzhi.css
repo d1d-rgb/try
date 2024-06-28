@@ -1,0 +1,164 @@
+
+/*.container {
+    max-width: 600px;
+}*/
+.form-group {
+    margin-bottom: 20px;
+}
+#imagePreview {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#imagePreview .thumbnail {
+    position: relative;
+    flex: 0 0 calc(33.333% - 10px);
+    max-width: calc(33.333% - 10px);
+    margin: 0 5px 10px 0;
+}
+#imagePreview img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#hiddenInput {
+    display: none;
+    }
+/* 顶部jumbotron样式 */
+.jumbotron {
+    background-color: black;
+    color: white;
+    margin-bottom: 0;
+}
+
+/* 导航条样式 */
+.navbar {
+    background-color: white; /* 下面的导航条背景颜色 */
+    min-height: 50px; /* 设置导航栏最小高度 */
+    padding: 10px 0; /* 调整导航栏的上下内边距 */
+    margin-top: 0!important;
+}
+.navbar-brand {
+    height: 50px; /* 设置导航栏品牌的高度 */
+    padding: 10px; /* 调整导航栏品牌的内边距 */
+}
+
+.navbar-nav > li > a {
+    line-height: 30px; /* 调整导航链接的行高 */
+    padding-top: 10px; /* 调整导航链接的上内边距 */
+    padding-bottom: 10px; /* 调整导航链接的下内边距 */
+}
+
+.navbar-toggle {
+    margin-top: 10px; /* 调整导航栏切换按钮的上外边距 */
+
+}
+/* 移除底部导航条边框 */
+.navbar-inverse {
+    border: none;
+}
+
+/* 修改导航条链接颜色 */
+.navbar-inverse .navbar-nav>li>a {
+    color: black;
+}
+/* 修改导航条激活链接颜色 */
+/*.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+    color: white;
+    background-color: black;
+}*/
+/* 修改按钮样式 */
+.btn-info {
+    color: white;
+    background-color: black;
+    border-color: white;
+}
+
+/* 修改按钮悬停时的样式 */
+.btn-info:hover {
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+/* 添加圆角小块样式 */
+.form-module {
+    background-color: #f8f9fa; /* 设置模块的背景颜色 */
+    border-radius: 10px; /* 设置圆角半径 */
+    padding: 15px; /* 设置内边距，增加空间感 */
+    margin-bottom: 20px; /* 设置底部外边距，用于分隔模块 */
+}
+
+.card {
+    border-radius: 15px;
+    margin-bottom: 20px; /* Add margin between card sections */
+    padding: 20px; /* Add padding inside the cards */
+    /*background-color: #343a40;*/ /* Add black background color */
+    color: white; /* Set text color to white for better visibility */
+}
+
+
+.card input,
+.card textarea,
+.card select {
+    border: none;
+    border-radius: 0; /* Ensure no border-radius on the input elements */
+    box-shadow: none; /* Remove any box shadow */
+}
+
+.input-group {
+            align-items: center;
+        }
+
+.container1 {
+    max-width: 600px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+#imagePreview {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#imagePreview .thumbnail {
+    position: relative;
+    flex: 0 0 calc(33.333% - 10px);
+    max-width: calc(33.333% - 10px);
+    margin: 0 5px 10px 0;
+}
+#imagePreview img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#hiddenInput {
+    display: none;
+}
+.navbar-nav > li > a:focus, .navbar-nav > li > a:hover {
+    background-color: transparent !important; /* 设置鼠标悬停时的背景色为透明 */
+    color: #888 !important;
+}

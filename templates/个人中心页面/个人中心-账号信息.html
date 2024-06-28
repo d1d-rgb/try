@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1">
+        <title>个人中心-账号信息</title>
+        <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <script src="{{ url_for('static',filename='js/jquery-3.7.1.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+        <link href="{{ url_for('static',filename='css/selfData/selfData_style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">用户中心</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li><a href="{{url_for('usercenter.basic')}}">基本信息</a></li>
+                        <li class="active"><a href="#">账户信息</a></li>
+                        <li><a href="{{url_for('usercenter.address')}}">收货地址</a></li>
+
+                        <li><a href="{{url_for('users.logout')}}"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-121 column">
+                    <h2>
+
+                    </h2>
+                    <form role="form" method="post">
+                        <div class="form-group">
+                            <h2>账号信息</h2>
+                            <hr>
+                            {% if user %}
+                            <label for="账号">用户名</label><input type="text" class="form-control" id="账号" name="username" placeholder="{{user.username}}" />
+                            {% else %}
+                            <label for="账号">用户名</label><input type="text" class="form-control" id="账号" name="username" />
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {% if user_detail.phone %}
+                            <label for="手机号">手机号</label><input type="text" class="form-control" id="手机号" name="phone" maxlength="11"  placeholder="{{user_detail.phone}}" />
+                            {% else %}
+                            <label for="手机号">手机号</label><input type="text" class="form-control" id="手机号" name="phone" maxlength="11" placeholder="请输入手机号" />
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="邮箱">邮箱</label><input type="text" class="form-control" name="email" id="邮箱" placeholder="{{user.email}}" readonly />
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <h2>实名认证</h2>
+                            <hr>
+                            {% if user_detail.citizen_id %}
+                            <label for="身份证号">身份证号</label><input type="text" class="form-control" id="身份证号" name="citizen_id" maxlength="18" placeholder="{{user_detail.citizen_id}}" />
+                            {% else %}
+                            <label for="身份证号">身份证号</label><input type="text" class="form-control" id="身份证号" name="citizen_id" maxlength="18" placeholder="请输入身份证号"/>
+                            {% endif %}
+                            <hr>
+                            {% if user_detail.name %}
+                            <label for="真实姓名">真实姓名</label><input type="text" class="form-control" id="真实姓名" name="name" placeholder="{{user_detail.name}}" />
+                            {% else %}
+                            <label for="真实姓名">真实姓名</label><input type="text" class="form-control" id="真实姓名" name="name" placeholder="请输入真实姓名"/>
+                            {% endif %}
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg ">保存信息</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-4 column">
+                </div>
+                <div class="col-md-4 column">
+                </div>
+                <div class="col-md-4 column">
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

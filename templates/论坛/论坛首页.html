@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{#  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">#}
+  <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}">
+  <title>论坛</title>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('qa.index') }}">论坛</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{ url_for('wuping.index') }}">首页</a></li>
+        <li><a href="{{ url_for('qa.hot_posts') }}">热门帖子</a></li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search" method="GET" action="{{ url_for('qa.search') }}">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="搜索" name="q">
+        </div>
+        <button type="submit" class="btn btn-default">提交</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{url_for('qa.public_question')}}">发布帖子</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="container">
+    <h2>欢迎来到论坛</h2>
+
+    <div class="row">
+      <div class="col-md-8">
+        <!-- 帖子列表 -->
+
+        {% if is_hot_page %}
+            <h4>最热帖子</h4>
+    <!-- 热门帖子列表 -->
+    {% for question in hot_questions %}
+        <div>
+            <a href="{{ url_for('qa.qa_detail', qa_id=question.id) }}">{{ question.title }}</a>
+            <span>评论数：{{ question.answers|length }}</span>
+            <hr>
+        </div>
+    {% endfor %}
+    {% else %}
+            <h4>最新帖子</h4>
+            <!-- 最新帖子列表 -->
+    {% for question in questions %}
+        <div>
+            <a href="{{ url_for('qa.qa_detail', qa_id=question.id) }}">{{ question.title }}</a>
+            <hr>
+        </div>
+    {% endfor %}
+{% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <footer class="navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">版权所有 &copy; 论坛 2023</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static',filename='bootstrap/js/jquery-3.7.1.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

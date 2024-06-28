@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{#  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">#}
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}">
+  <title>发布帖子</title>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('qa.index') }}">论坛</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="{{ url_for('wuping.index') }}">首页</a></li>
+        <li><a href="{{ url_for('qa.hot_posts') }}">热门帖子</a></li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="{{url_for('qa.public_question')}}">发布帖子</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="container">
+    <h2>发布新帖子</h2>
+        <form method="post" >
+          <div class="form-group">
+            <label for="title">标题:</label>
+            <input type="text" class="form-control" id="title" name="title">
+          </div>
+          <div class="form-group">
+            <label for="content">内容:</label>
+            <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+  </div>
+
+  <!-- 底部 -->
+  <footer class="navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">版权所有 &copy; 论坛 2023</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static',filename='bootstrap/js/jquery-3.7.1.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

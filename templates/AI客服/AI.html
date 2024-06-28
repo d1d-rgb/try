@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Chat Example</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.min 4.5.3.css') }}">
+    <!-- <link rel="stylesheet" href="../1.5/web-front-end/页面框架和demo/校园二手平台/bootstrap/css/bootstrap.min.css"> -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static',filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min 4.5.3.js') }}"></script>
+
+    <style>
+        /* Additional styles for chat bubbles and chat container */
+        .chat-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-height: 600px;
+            /* 限定最大高度 */
+            max-width: 1000px;
+            height: 500px;
+            /* 新增固定高度 */
+            width: 1000px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .chat-bubble {
+            display: flex;
+            align-items: flex-start;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .incoming {
+            background-color: #e9ecef;
+        }
+
+        .outgoing {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 15px;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .textarea {
+            height: auto;
+            resize: none;
+        }
+
+        .btnpadding {
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">AI客服</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('wuping.public_wuping') }}">发布闲置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('qa.index') }}">论坛</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <div class="nav-item">
+                    <a class="nav-link" href="{{ url_for('usercenter.basic') }}">个人中心</a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- 对话窗 -->
+    <div class="container">
+        <div class="justify-content-md-center mt-5">
+            <div class="chat-container">
+                <!--外围框选中区域-->
+
+                <!-- answer 客服回话：显示回答内容时重复调用本块div即可（记得替换文本内容）-->
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <div class="col-md-1 text-right">
+                                <img src="http://placekitten.com/50/50" alt="User Image" class="rounded-circle"
+                                    width="30" height="30">
+                            </div>
+
+                            <div class="col-md-10">
+                                <div class="chat-bubble incoming" style="display: inline-block;">
+                                    Hi there! How are you?Hi there! How are you?Hi there! How are you?Hi there! How are
+                                    you?Hi there! How are you?Hi there! How are you?Hi there! How are you?Hi there! How
+                                    are you?Hi there! How are you?Hi there! How are you?Hi there! How are you?Hi there!
+                                    How are you?Hi there! How are you?Hi there! How are you?Hi there! How are you?Hi
+                                    there! How are you?Hi there! How are you?Hi there! How are you?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- answer -->
+
+                <!-- ask 用户问话：显示问话内容时反复调用（记得替换文本内容）本div块即可-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10 text-right">
+                                <div class="chat-bubble outgoing text-left" style="display: inline-block;">
+                                    I'm good, thanks! How about you?I'm good, thanks! How about you?I'm good, thanks!
+                                    How about you?I'm good, thanks! How about you?I'm good, thanks! How about you?I'm
+                                    good, thanks! How about you?I'm good, thanks! How about you?I'm good, thanks! How
+                                    about you?I'm good, thanks! How about you?I'm good, thanks! How about you?I'm good,
+                                    thanks! How about you?I'm good, thanks! How about you?
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <img src="http://placekitten.com/50/50" alt="User Image" class="rounded-circle"
+                                    width="30" height="30">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ask -->
+
+                <!-- answer -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Example Chat -->
+                        <div class="row">
+                            <div class="col-md-1 text-right">
+                                <img src="http://placekitten.com/50/50" alt="User Image" class="rounded-circle"
+                                    width="30" height="30">
+                            </div>
+
+                            <div class="col-md-10">
+                                <div class="chat-bubble incoming" style="display: inline-block;">
+                                    Hi there! How are you?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- answer -->
+
+                <!-- ask -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10 text-right">
+                                <div class="chat-bubble outgoing text-left" style="display: inline-block;">
+                                    我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好我擦或爱好
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <img src="http://placekitten.com/50/50" alt="User Image" class="rounded-circle"
+                                    width="30" height="30">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ask -->
+
+
+            </div>
+
+            <!-- Chat Input -->
+            <div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div>
+                                <textarea type="text" class="form-control textarea" placeholder="请输入内容..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="btnpadding">
+                                <button class="btn btn-primary" type="button">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Chat Input -->
+
+
+    </div>
+
+    </div>
+</body>
+
+</html>
